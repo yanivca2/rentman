@@ -1,0 +1,42 @@
+@if (treeData.length > 0) {
+  <ul class="tree-list" [style.--level]="level">
+    @for (node of treeData; track node.id) {
+      <li class="tree-list__item list-item">
+        <div class="expandable-container">
+          <label
+            class="list-item__label"
+            [class.bold]="node.children && node.children.length > 0"
+            (click)="onToggleSelection(node)">
+            <input
+              [id]="node.id"
+              type="checkbox"
+              [checked]="node.selectionType != SelectionType.UNSELECTED"
+              class="list-item__checkbox"
+              (change)="onToggleSelection(node)"
+              [indeterminate]="node.selectionType === SelectionType.INDETERMINATE"
+              />
+            {{ node.title }}
+          </label>
+          @if (node.children && node.children.length > 0) {
+            <button
+              [attr.aria-label]="node.collapsed ? 'Expand' : 'Collapse'"
+              (click)="onToggleCollapsed(node)"
+              class="expandable-button"
+              [class.collapsed]="node.collapsed"
+              ></button>
+          }
+        </div>
+        @if (node.children && node.children.length > 0) {
+          <selection-tree
+            class="child-tree-list"
+            [class.hidden]="node.collapsed"
+            [treeData]="node.children!"
+            [level]="level + 1"
+            (toggleSelection)="onChildToggleSelection($event)"
+            (toggleCollapsed)="onChildToggleCollapsed($event)">
+          </selection-tree>
+        }
+      </li>
+    }
+  </ul>
+}

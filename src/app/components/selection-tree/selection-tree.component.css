@@ -1,0 +1,120 @@
+:host {
+  --level: 1;
+  
+  display: block;
+}
+
+.tree-list, .tree-list__item {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.expandable-container {
+  position: relative;
+
+  &:hover {
+    background-color: hsl(0, 0%, 96%);
+  }
+}
+
+.list-item__label {
+  align-items: center;
+  cursor: default;
+  display: flex;
+  gap: 8px;
+  padding-block: 8px;
+  padding-inline-start: calc(var(--level) * 16px);
+
+  &.bold {
+    font-weight: bolder;
+  }
+}
+
+.list-item__checkbox {
+  align-items: center;
+  appearance: none;
+  border: 2px solid hsl(210, 0%, 89%);
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: flex;
+  height: 16px;
+  justify-content: center;
+  width: 16px;
+
+  &:checked, &:indeterminate {
+    border: none;
+    background-color: hsl(213, 97%, 53%);
+  }
+
+  &:before {
+    content: "";
+  }
+
+  &:checked::before {
+    border-bottom: 2px solid hsl(0, 0%, 100%);
+    border-right: 2px solid hsl(0, 0%, 100%);
+    height: 8px;
+    transform: rotate(45deg) translate(-1px, -1px);
+    width: 4px;
+  }
+
+  /**
+  * Safari and Chrome behave differently here (Safari treats "indeterminate" as "checked"
+  * whereas Chrome doesn't, so we need to override all above stylings in order for this
+  * to look good in Safari as well.
+  */  
+  &:indeterminate::before {
+    border: 1px solid hsl(0, 0%, 100%);
+    border-radius: 1px;
+    height: 0;
+    transform: none;
+    width: 10px;
+  }
+}
+
+.expandable-button {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  height: 38px;
+  inset-block-end: 0;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  justify-content: center;
+  position: absolute;
+  overflow: hidden;
+  outline-offset: -1px;
+  width: 38px;
+
+  &::before {
+    content: "";
+    border-bottom: 2px solid hsl(195, 3%, 24%);
+    border-right: 2px solid hsl(195, 3%, 24%);
+    height: 4px;
+    transform: rotate(225deg);
+    transition: transform 200ms;
+    width: 4px;
+  }
+
+  &.collapsed::before  {
+    transform: rotate(45deg);
+  }
+
+  &:hover {
+    background-color: hsla(0, 0%, 76%, 0.331);
+  }
+}
+
+.child-tree-list {
+  height: calc-size(auto, size);
+  overflow-y: hidden;
+  transition: height 0.3s;
+
+  &.hidden {
+    height: 0;
+  }
+}

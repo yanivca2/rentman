@@ -1,0 +1,6 @@
+:host {
+    color: hsl(195, 3%, 24%);
+    display: block;
+    font: 14px/20px Helvetica, Tahoma, sans-serif;
+    padding: 16px;
+}

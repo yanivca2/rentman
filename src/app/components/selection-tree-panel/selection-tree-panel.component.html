@@ -1,0 +1,30 @@
+<div class="tree-container">
+  @if (isLoading) {
+    <p>Loading...</p>
+  } @else if (hasError) {
+    <p>Error loading data</p>
+  } @else if (treeData.length > 0) {
+    <selection-tree
+      class="selection-tree"
+      [treeData]="treeData"
+      [level]="1"
+      (toggleSelection)="onSelectionToggle($event)"
+      (toggleCollapsed)="onCollapseToggle($event)"
+      >
+    </selection-tree>
+    <div class="selected-container">
+      @if (selectedIds.length > 0) {
+        Selected item IDs: {{selectedIds.join(', ')}}
+      } @else {
+        No selected items
+      }
+    </div>
+    <div class="footer">
+      <button class="footer-button" (click)="onClearSelectionClick()">
+        Clear selection
+      </button>
+    </div>
+  } @else {
+    <p>No data available</p>
+  }
+</div> 
