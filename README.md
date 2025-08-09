@@ -11,6 +11,8 @@ npm install
 npm run start
 ```
 
+Tested with node version `22.14.0`.
+
 ## Selection System Overview
 
 - **Items** have their selection state stored directly in the `selectedMap` of the store
@@ -45,7 +47,7 @@ The selection system automatically:
 
 ## A brief note on the project
 
-This project was built with the standard Angular CLI, so many of the initial files were scaffolded automatically. I've organized the project to include a "server" folder in the root directory, which contains the `response.json` file. All other project-specific code I create is located within the folders under `src/app`.
+This project was built with the standard Angular CLI (that's why there are few low severity npm vulnerabilities...), so many of the initial files were scaffolded automatically. I've organized the project to include a "server" folder in the root directory, which contains the `response.json` file. All other project-specific code I create is located within the folders under `src/app`.
 
 As part of this assessment, I took the opportunity to explore and implement some newer Angular features, including Signals and the NgRx SignalStore, both of which were new to me. This was a fun learning experience and I enjoyed the development process, which took me about a full day of work to complete.
 
